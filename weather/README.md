@@ -1,0 +1,1 @@
+images for forecast created by Linector from Flaticon

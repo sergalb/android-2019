@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">weather</string>
+    <string name="monday">Mo</string>
+    <string name="tuesday">Tu</string>
+    <string name="_1">-1°C</string>
+    <string name="wednesday">We</string>
+    <string name="_3">+3°C</string>
+    <string name="thursday">Th</string>
+    <string name="_22">-22°C</string>
+    <string name="friday">Fr</string>
+    <string name="_11">+11°C</string>
+    <string name="_17">+17°C</string>
+    <string name="sunday">Su</string>
+    <string name="_6">+6°C</string>
+    <string name="sa">Sa</string>
+    <string name="weekend">Weekend</string>
+    <string name="saint_petersburg">Saint-Petersburg</string>
+    <string name="_0">0°C</string>
+    <string name="date">4 September, Friday</string>
+    <string name="_42_c">+42°C</string>
+</resources>
