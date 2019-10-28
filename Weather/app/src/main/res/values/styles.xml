@@ -11,19 +11,36 @@
     <style name="WeekImageStyle" >
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">40dp</item>
-
     </style>
 
     <style name="WeekTextStyle">
         <item name="android:textSize">15sp</item>
         <item name="android:paddingTop">10dp</item>
-
     </style>
 
     <style name="WeekForecastStyle">
         <item name="android:textSize">15sp</item>
         <item name="android:layout_marginBottom">10dp</item>
+    </style>
 
+
+    <style name="LandWeekImageStyle" >
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+    </style>
+
+    <style name="LandWeekTextStyle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:layout_marginTop">3dp</item>
+    </style>
+
+
+    <style name="LandWeekForecastStyle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginEnd">5dp</item>
     </style>
 
 </resources>

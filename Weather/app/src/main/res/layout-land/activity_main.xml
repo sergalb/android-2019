@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/saint_petersburg"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toRightOf="@id/main_weather_image"
+        app:layout_constraintRight_toLeftOf="@id/mo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:text="@string/date"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toLeftOf="@id/city"
+        app:layout_constraintRight_toRightOf="@id/city"
+        app:layout_constraintTop_toBottomOf="@id/city" />
+
+    <ImageView
+        android:id="@+id/main_weather_image"
+        android:layout_width="205dp"
+        android:layout_height="222dp"
+        android:layout_marginStart="50dp"
+        android:src="@drawable/ic_021_sunrise"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/main_weather_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/_42_c"
+        android:textSize="70sp"
+        app:layout_constraintLeft_toLeftOf="@id/date"
+        app:layout_constraintRight_toRightOf="@id/date"
+        app:layout_constraintTop_toBottomOf="@id/date" />
+
+
+    <TextView
+        android:id="@+id/mo"
+        style="@style/LandWeekTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/monday"
+        app:layout_constraintRight_toLeftOf="@id/mo_image"
+        app:layout_constraintTop_toTopOf="@id/mo_image" />
+
+    <TextView
+        android:id="@+id/mo_forecast"
+        style="@style/LandWeekForecastStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        app:layout_constraintRight_toLeftOf="@id/mo_image"
+        app:layout_constraintTop_toBottomOf="@id/mo" />
+
+    <ImageView
+        android:id="@+id/mo_image"
+        style="@style/LandWeekImageStyle"
+        android:src="@drawable/ic_021_cloud"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tu_image"
+        app:layout_constraintVertical_weight="1"/>
+
+
+
+    <TextView
+        android:id="@+id/tu"
+        style="@style/LandWeekTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tuesday"
+        app:layout_constraintRight_toLeftOf="@id/tu_image"
+        app:layout_constraintTop_toTopOf="@id/tu_image" />
+
+    <TextView
+        android:id="@+id/tu_forecast"
+        style="@style/LandWeekForecastStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_1"
+        app:layout_constraintRight_toLeftOf="@id/tu_image"
+        app:layout_constraintTop_toBottomOf="@id/tu" />
+
+    <ImageView
+        android:id="@+id/tu_image"
+        style="@style/LandWeekImageStyle"
+        android:src="@drawable/ic_021_rain_1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mo_image"
+        app:layout_constraintBottom_toTopOf="@id/we_image"
+        app:layout_constraintVertical_weight="1"/>
+
+    <TextView
+        android:id="@+id/we"
+        style="@style/LandWeekTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wednesday"
+        app:layout_constraintRight_toLeftOf="@id/we_image"
+        app:layout_constraintTop_toTopOf="@id/we_image" />
+
+    <TextView
+        android:id="@+id/we_forecast"
+        style="@style/LandWeekForecastStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_3"
+        app:layout_constraintRight_toLeftOf="@id/we_image"
+        app:layout_constraintTop_toBottomOf="@id/we" />
+
+    <ImageView
+        android:id="@+id/we_image"
+        style="@style/LandWeekImageStyle"
+        android:src="@drawable/ic_021_cloudy_1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tu_image"
+        app:layout_constraintBottom_toTopOf="@id/th_image"
+        app:layout_constraintVertical_weight="1"
+        />
+
+    <TextView
+        android:id="@+id/th"
+        style="@style/LandWeekTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/thursday"
+        app:layout_constraintRight_toLeftOf="@id/th_image"
+        app:layout_constraintTop_toTopOf="@id/th_image" />
+
+    <TextView
+        android:id="@+id/th_forecast"
+        style="@style/LandWeekForecastStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_22"
+        app:layout_constraintRight_toLeftOf="@id/th_image"
+        app:layout_constraintTop_toBottomOf="@id/th" />
+
+    <ImageView
+        android:id="@+id/th_image"
+        style="@style/LandWeekImageStyle"
+        android:src="@drawable/ic_021_snowing_3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/we_image"
+        app:layout_constraintBottom_toTopOf="@id/fr_image"
+        app:layout_constraintVertical_weight="1"
+        />
+
+
+    <TextView
+        android:id="@+id/fr"
+        style="@style/LandWeekTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/friday"
+        app:layout_constraintRight_toLeftOf="@id/fr_image"
+        app:layout_constraintTop_toTopOf="@id/fr_image" />
+
+    <TextView
+        android:id="@+id/fr_forecast"
+        style="@style/LandWeekForecastStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_11"
+        app:layout_constraintRight_toLeftOf="@id/fr_image"
+        app:layout_constraintTop_toBottomOf="@id/fr" />
+
+    <ImageView
+        android:id="@+id/fr_image"
+        style="@style/LandWeekImageStyle"
+        android:src="@drawable/ic_021_cloudy"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/th_image"
+        app:layout_constraintBottom_toTopOf="@id/sa_image"
+        app:layout_constraintVertical_weight="1"/>
+
+    <TextView
+        android:id="@+id/sa"
+        style="@style/LandWeekTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sa"
+        app:layout_constraintRight_toLeftOf="@id/sa_image"
+        app:layout_constraintTop_toTopOf="@id/sa_image" />
+
+    <TextView
+        android:id="@+id/sa_forecast"
+        style="@style/LandWeekForecastStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_17"
+        app:layout_constraintRight_toLeftOf="@id/sa_image"
+        app:layout_constraintTop_toBottomOf="@id/sa" />
+
+    <ImageView
+        android:id="@+id/sa_image"
+        style="@style/LandWeekImageStyle"
+        android:src="@drawable/ic_021_sun"
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/fr_image"
+        app:layout_constraintBottom_toTopOf="@id/su_image"
+        app:layout_constraintVertical_weight="1"
+        />
+
+    <TextView
+        android:id="@+id/su"
+        style="@style/LandWeekTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sunday"
+        app:layout_constraintRight_toLeftOf="@id/su_image"
+        app:layout_constraintTop_toTopOf="@id/su_image" />
+
+    <TextView
+        android:id="@+id/su_forecast"
+        style="@style/LandWeekForecastStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_6"
+        app:layout_constraintRight_toLeftOf="@id/su_image"
+        app:layout_constraintTop_toBottomOf="@id/su" />
+
+    <ImageView
+        android:id="@+id/su_image"
+        style="@style/LandWeekImageStyle"
+        android:src="@drawable/ic_021_storm"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sa_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_weight="1"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

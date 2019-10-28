@@ -3,16 +3,16 @@ package ru.ifmo.rain.balahin.game_loader
 import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.*
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import android.view.animation.LinearInterpolator
-import android.view.animation.PathInterpolator
 import androidx.core.animation.doOnEnd
 import kotlin.math.ceil
 import kotlin.math.min
@@ -33,7 +33,7 @@ class LoaderView @JvmOverloads constructor(
 
     private val crossPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val verticalCrossRect: RectF
-    private val horizontalCrossrect: RectF
+    private val horizontalCrossRect: RectF
     private val leftDot: RectF
     private val rightDot: RectF
     private val topDot: RectF
@@ -82,6 +82,7 @@ class LoaderView @JvmOverloads constructor(
     private var animator: Animator? = null
 
     init {
+        isSaveEnabled = true
         val a: TypedArray =
             context.obtainStyledAttributes(attrs, R.styleable.LoaderView, defStyleAttr, 0)
         try {
@@ -113,7 +114,7 @@ class LoaderView @JvmOverloads constructor(
                 crossSecondPart,
                 crossLength.toFloat()
             )
-            horizontalCrossrect = RectF(
+            horizontalCrossRect = RectF(
                 0f,
                 crossFirstPart,
                 crossLength.toFloat(),
@@ -236,7 +237,7 @@ class LoaderView @JvmOverloads constructor(
         val save = canvas.save()
         canvas.rotate(crossRotation, cx, cy)
         canvas.drawRoundRect(verticalCrossRect, radius, radius, crossPaint)
-        canvas.drawRoundRect(horizontalCrossrect, radius, radius, crossPaint)
+        canvas.drawRoundRect(horizontalCrossRect, radius, radius, crossPaint)
         canvas.restoreToCount(save)
 
         drawDot(leftDot, canvas, leftDotScale)
@@ -268,5 +269,68 @@ class LoaderView @JvmOverloads constructor(
 
     private fun dp(dp: Float): Float {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics)
+    }
+
+    override fun onSaveInstanceState(): Parcelable? {
+        val state = GameLoaderState(super.onSaveInstanceState())
+        animator?.pause()
+        state.crossRotation = crossRotation
+        state.topScale = topDotScale
+        state.rightScale= rightDotScale
+        state.downScale = downDotScale
+        state.leftScale = leftDotScale
+        state.animator = animator
+        return state
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        state as GameLoaderState
+        super.onRestoreInstanceState(state.superState)
+        crossRotation = state.crossRotation
+        topDotScale = state.topScale
+        rightDotScale= state.rightScale
+        downDotScale = state.downScale
+        leftDotScale = state.leftScale
+        animator = state.animator
+        animator?.resume()
+    }
+
+    private class GameLoaderState : BaseSavedState {
+        var crossRotation = 0f
+        var topScale = 1f
+        var rightScale = 1f
+        var downScale = 1f
+        var leftScale = 1f
+        var animator: Animator? = null
+
+
+        constructor(superState: Parcelable?) : super(superState)
+        constructor(parcel: Parcel) : super(parcel) {
+            animator = parcel.readValue(null) as Animator
+            crossRotation = parcel.readFloat()
+            topScale = parcel.readFloat()
+            rightScale = parcel.readFloat()
+            downScale = parcel.readFloat()
+            leftScale = parcel.readFloat()
+
+        }
+
+        override fun writeToParcel(out: Parcel, flags: Int) {
+            super.writeToParcel(out, flags)
+            out.writeValue(animator)
+            out.writeFloat(crossRotation)
+            out.writeFloat(topScale)
+            out.writeFloat(rightScale)
+            out.writeFloat(downScale)
+            out.writeFloat(leftScale)
+        }
+
+        companion object {
+            @JvmField
+            val CREATOR = object : Parcelable.Creator<GameLoaderState> {
+                override fun createFromParcel(source: Parcel): GameLoaderState = GameLoaderState(source)
+                override fun newArray(size: Int): Array<GameLoaderState?> = arrayOfNulls(size)
+            }
+        }
     }
 }
