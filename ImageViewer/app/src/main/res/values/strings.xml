@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ImageViewer</string>
+    <string name="permission_denied">sorry, but without permission to read your contacts app doesn\'t work correct</string>
+    <string name="explanation_permission">app need to read your contacts for show it</string>
+</resources>
