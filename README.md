@@ -11,10 +11,10 @@ description, links, and other come soon
 ## 3. contacts
 
 
-## 4. navigation
+## 4. image loader
 
 
-## 5. ?
+## 5. navigation
 
 
 ## 6. game loader
