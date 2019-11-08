@@ -23,20 +23,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setRecylerView()
         run()
-        /*val cll = MainApp.app.weatherApi.getFiveDayForecastByCityName("Saint Petersburg")
-        cll?.enqueue(object : Callback<WeekDTO> {
-            override fun onFailure(call: Call<WeekDTO>, t: Throwable) {
-                Log.e("LOOOOOG_TAG", "Failed with", t)
-            }
-
-            override fun onResponse(call: Call<WeekDTO>, response: Response<WeekDTO>) {
-                Log.d("LOOOOOG_TAG", Thread.currentThread().name)
-                val body = response.body()
-                Log.d("LOOOOOG_TAG", "Finished with ${response.code()}, body: $body")
-                *//*weekForecastAdapter.days = body ?: emptyList()
-                weekForecastAdapter.notifyDataSetChanged()*//*
-            }
-        })*/
     }
 
     fun setRecylerView() {
@@ -59,7 +45,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<List<DayModel>>, response: Response<List<DayModel>>) {
-                println("redownload")
                 val body:List<DayModel>? = response.body()
                 val today = body?.get(0)
                 findViewById<TextView>(R.id.date).text = today?.dayOfWeek
