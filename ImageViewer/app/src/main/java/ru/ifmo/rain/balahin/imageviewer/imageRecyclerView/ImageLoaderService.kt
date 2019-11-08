@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import androidx.annotation.UiThread
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import ru.ifmo.rain.balahin.imageviewer.BuildConfig
 import ru.ifmo.rain.balahin.imageviewer.MainActivity
 import ru.ifmo.rain.balahin.imageviewer.dto.Image
 import ru.ifmo.rain.balahin.imageviewer.viewModel.DownloadInformation
@@ -26,10 +27,10 @@ class ImageLoaderService : IntentService("Loader thread") {
             val connection = URL("https://api.unsplash.com/photos?page=$page")
                 .openConnection() as HttpURLConnection
             connection.requestMethod = "GET"
-            //todo hide token
+
             connection.setRequestProperty(
                 "Authorization",
-                "Client-ID bdea034e30ac4ae092235fafc732e329e813f140781d5fbd2d6f4ca240e14161"
+                "Client-ID ${BuildConfig.apikey}"
             )
             val newImages = mapper.readValue<MutableList<Image>>(connection.inputStream)
             images = newImages.asSequence().map {
