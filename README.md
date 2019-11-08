@@ -43,7 +43,7 @@ in process :)
 
 ![sixth task description](screenshots/tasks/6_task_description_1.png)
 
-![sixth task description](screenshots/tasks/6_task_description.png)
+![sixth task description](screenshots/tasks/6_task_description_2.png)
 
 ![realisation](GameLoader)
 
