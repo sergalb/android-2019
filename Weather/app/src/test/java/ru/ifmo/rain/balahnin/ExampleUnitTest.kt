@@ -1,4 +1,4 @@
-package ru.ifmo.rain.weather
+package ru.ifmo.rain.balahnin
 
 import org.junit.Test
 
