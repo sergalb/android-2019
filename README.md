@@ -1,6 +1,6 @@
 # Homeworks of android course
 
-description, links, and other come soon
+ links, and other come soon
 
 ## 1. calculator
 ![first task description](screenshots/tasks/1_task_description.png)
