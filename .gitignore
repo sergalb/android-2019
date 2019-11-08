@@ -1,4 +1,5 @@
 *.iml
 .idea
 *.gradle
+*keystore.properties
 !gradle-wrapper.jar
