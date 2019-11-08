@@ -1,4 +1,4 @@
-# Homeworks of android curse
+# Homeworks of android course
 
 description, links, and other come soon
 
@@ -11,7 +11,7 @@ description, links, and other come soon
 
 and how it's look
 
-![first_task_result](screenshots/forecast portrait.jpg)
+![first_task_result](screenshots/forecast_landscape.jpg)
 
 ## 3. contacts
 
