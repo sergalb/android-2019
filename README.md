@@ -66,4 +66,4 @@ and how it's look
 
 ![ninth task description](screenshots/tasks/9_task_description.png)
 
-in work)
+![realisation](https://github.com/sergalb/android-2019/tree/ninth/Contacts)
