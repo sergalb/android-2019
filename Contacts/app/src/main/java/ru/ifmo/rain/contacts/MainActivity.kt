@@ -1,38 +1,50 @@
 package ru.ifmo.rain.contacts
 
 import android.Manifest
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
+import android.view.Menu
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.IntentCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import android.R.id
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.telephony.PhoneNumberUtils
+import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.content_main.contact_recycler_view
 
 
 class MainActivity : AppCompatActivity() {
     private val PERMISSIONS_REQUEST_READ_CONTACTS = 478
-
+    lateinit var contactAdapter: ContactAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         checkPermissionAndSetRecyclerView()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        // Inflate menu to add items to action bar if it is present.
+        inflater.inflate(R.menu.app_bar, menu)
+        // Associate searchable configuration with the SearchView
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu.findItem(R.id.search_bar).actionView as SearchView
+        searchView.setSearchableInfo(
+            searchManager.getSearchableInfo(componentName)
+        )
+        searchView.setOnQueryTextListener(searchListener)
+        return true
+    }
+
     private fun setRecyclerView() {
         val viewManager = LinearLayoutManager(this)
-        val contactAdapter = ContactAdapter(
+        contactAdapter = ContactAdapter(
             fetchAllContacts()
         ) { contact ->
             val uri = Uri.fromParts("tel", contact.phoneNumber, null)
@@ -103,4 +115,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private val searchListener: SearchView.OnQueryTextListener =
+        object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                search(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                search(newText)
+                return true
+            }
+        }
+
+    private fun search(query: String?) {
+        val contacts: List<Contact> =
+            if (query != null) {
+                fetchContactsByPhoneOrName(query)
+            } else {
+                emptyList()
+            }
+        contactAdapter.contacts = contacts
+        contactAdapter.notifyDataSetChanged()
+    }
 }
+
+
