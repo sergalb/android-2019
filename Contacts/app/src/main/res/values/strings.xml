@@ -4,4 +4,5 @@
     <string name="explanation_permission">app need to read your contacts for show it</string>
     <string name="app_label">contacts</string>
     <string name="search_hint">Search contacts by name or phone number</string>
+    <string name="no_contacts_found">no contacts found</string>
 </resources>

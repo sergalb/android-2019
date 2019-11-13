@@ -14,14 +14,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.content_main.contact_recycler_view
 
 
 class MainActivity : AppCompatActivity() {
     private val PERMISSIONS_REQUEST_READ_CONTACTS = 478
     lateinit var contactAdapter: ContactAdapter
+    private val contactSearchUtility = ContactSearchUtility()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -44,18 +42,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun setRecyclerView() {
         val viewManager = LinearLayoutManager(this)
+        val contacts = fetchAllContacts()
         contactAdapter = ContactAdapter(
-            fetchAllContacts()
+            contacts
         ) { contact ->
             val uri = Uri.fromParts("tel", contact.phoneNumber, null)
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
-        contact_recycler_view.apply {
+
+        contactSearchUtility.addContactsForSearch(contacts)
+
+        val contactRecyclerView = findViewById<EmptyRecyclerView>(R.id.contact_recycler_view)
+        contactRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = contactAdapter
         }
+        contactRecyclerView.setEmptyView(findViewById(R.id.empty_view))
     }
 
     private fun checkPermissionAndSetRecyclerView() {
@@ -129,12 +133,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     private fun search(query: String?) {
-        val contacts: List<Contact> =
-            if (query != null) {
-                fetchContactsByPhoneOrName(query)
-            } else {
-                emptyList()
-            }
+        val contacts: List<Contact> = contactSearchUtility.search(query)
         contactAdapter.contacts = contacts
         contactAdapter.notifyDataSetChanged()
     }

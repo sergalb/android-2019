@@ -8,6 +8,7 @@ data class Contact(val name: String, val phoneNumber: String)
 fun Context.fetchAllContacts(): List<Contact> = fetchContacts()
 
 
+//can't test without context
 fun Context.fetchContactsByPhoneOrName(searchText: String): List<Contact> {
     val mProjection = arrayOf(
         ContactsContract.Contacts._ID,
@@ -40,6 +41,6 @@ private fun Context.fetchContacts(projection: Array<String>? = null, selection: 
 
                 builder.add(Contact(name, phoneNumber))
             }
-            return builder
+            return builder.sortedWith(compareBy({it.name}, {it.phoneNumber}))
         }
 }
