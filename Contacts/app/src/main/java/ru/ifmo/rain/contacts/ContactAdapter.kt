@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class ContactAdapter(
-    private val contacts: List<Contact>,
+    var contacts: List<Contact>,
     private val onClick: (Contact) -> Unit
 ) : RecyclerView.Adapter<ContactViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
