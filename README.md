@@ -21,7 +21,7 @@
 
 ![third task description](screenshots/tasks/3_task_description_2.png)
 
-![realisation](Contacts)
+![realisation](https://github.com/sergalb/android-2019/tree/third/Contacts)
 
 
 ## 4. image loader
@@ -66,4 +66,4 @@ and how it's look
 
 ![ninth task description](screenshots/tasks/9_task_description.png)
 
-![realisation](https://github.com/sergalb/android-2019/tree/ninth/Contacts)
+![realisation](Contacts)
