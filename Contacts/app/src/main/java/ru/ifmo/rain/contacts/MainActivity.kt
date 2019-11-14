@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
+
         // Inflate menu to add items to action bar if it is present.
         inflater.inflate(R.menu.app_bar, menu)
         // Associate searchable configuration with the SearchView
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
             searchManager.getSearchableInfo(componentName)
         )
         searchView.setOnQueryTextListener(searchListener)
+        super.onCreateOptionsMenu(menu)
         return true
     }
 

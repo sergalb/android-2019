@@ -34,7 +34,7 @@ class SearchTest {
             setOf(
                 Contact("serg", "+7999888545"),
                 Contact("sergalb", "+79991234551")
-                ),
+            ),
             searchRes.asSequence().toSet()
         )
     }
