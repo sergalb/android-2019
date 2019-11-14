@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.ifmo.rain.balahin.imageviewer.MainActivity
 import ru.ifmo.rain.balahin.imageviewer.R
 import ru.ifmo.rain.balahin.imageviewer.imageActivity.ImageActivity
-import ru.ifmo.rain.balahin.imageviewer.viewModel.ImageModel
+import ru.ifmo.rain.balahin.imageviewer.dto.ImageModel
 
 class ImageAdapter : RecyclerView.Adapter<ImageViewHolder>() {
     val images: MutableList<ImageModel> = ArrayList()

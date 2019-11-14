@@ -11,7 +11,7 @@ import ru.ifmo.rain.balahin.imageviewer.MainActivity
 import ru.ifmo.rain.balahin.imageviewer.R
 import java.lang.ref.WeakReference
 
-class ImageActivity: AppCompatActivity() {
+class ImageActivity : AppCompatActivity() {
     private lateinit var imageView: ImageView
     var maxWidth: Int? = null
     var maxHeight: Int? = null
@@ -40,9 +40,18 @@ class ImageActivity: AppCompatActivity() {
         cash[cashInd] = CashValue(true, null)
         FullImageLoaderService.imageView = WeakReference(imageView)
         val serviceIntent = Intent(this, FullImageLoaderService::class.java)
-        serviceIntent.putExtra(MainActivity.INTENT_FULL_LINK, intent.getStringExtra(MainActivity.INTENT_FULL_LINK))
-        serviceIntent.putExtra(MainActivity.INTENT_WIDTH, intent.getIntExtra(MainActivity.INTENT_WIDTH, 0))
-        serviceIntent.putExtra(MainActivity.INTENT_HEIGHT, intent.getIntExtra(MainActivity.INTENT_HEIGHT, 0))
+        serviceIntent.putExtra(
+            MainActivity.INTENT_FULL_LINK,
+            intent.getStringExtra(MainActivity.INTENT_FULL_LINK)
+        )
+        serviceIntent.putExtra(
+            MainActivity.INTENT_WIDTH,
+            intent.getIntExtra(MainActivity.INTENT_WIDTH, 0)
+        )
+        serviceIntent.putExtra(
+            MainActivity.INTENT_HEIGHT,
+            intent.getIntExtra(MainActivity.INTENT_HEIGHT, 0)
+        )
         serviceIntent.putExtra(MainActivity.INTENT_INDEX, imageInd)
         serviceIntent.putExtra(INTENT_ORIENTATION, portrait)
         serviceIntent.putExtra(INTENT_MAX_WIDTH, maxWidth)
@@ -76,12 +85,12 @@ class ImageActivity: AppCompatActivity() {
     }
 }
 
-data class CashInd (
+data class CashInd(
     val ind: Int,
     var isPortrait: Boolean
 )
 
-data class CashValue (
+data class CashValue(
     var isLoading: Boolean,
     var bitmap: Bitmap?
 )

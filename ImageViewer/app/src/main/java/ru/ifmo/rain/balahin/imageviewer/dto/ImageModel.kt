@@ -1,8 +1,8 @@
-package ru.ifmo.rain.balahin.imageviewer.viewModel
+package ru.ifmo.rain.balahin.imageviewer.dto
 
 import android.graphics.Bitmap
 
-data class ImageModel (
+data class ImageModel(
     val image: Bitmap?,
     val description: String = "",
     val author: String = "",

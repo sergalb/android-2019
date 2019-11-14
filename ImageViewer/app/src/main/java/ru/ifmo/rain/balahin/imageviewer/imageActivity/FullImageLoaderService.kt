@@ -27,7 +27,8 @@ class FullImageLoaderService : IntentService("Loader thread") {
         val width: Int = intent?.getIntExtra(MainActivity.INTENT_WIDTH, maxWidth) ?: 0
         val height: Int = intent?.getIntExtra(MainActivity.INTENT_HEIGHT, maxHeight) ?: 0
         val ind: Int = intent?.getIntExtra(MainActivity.INTENT_INDEX, 0) ?: 0
-        val portrait: Boolean = intent?.getBooleanExtra(ImageActivity.INTENT_ORIENTATION, true) ?: true
+        val portrait: Boolean =
+            intent?.getBooleanExtra(ImageActivity.INTENT_ORIENTATION, true) ?: true
 
         cashInd = CashInd(ind, portrait)
         var querySymbol = "?"

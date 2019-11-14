@@ -9,8 +9,8 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import ru.ifmo.rain.balahin.imageviewer.BuildConfig
 import ru.ifmo.rain.balahin.imageviewer.MainActivity
 import ru.ifmo.rain.balahin.imageviewer.dto.Image
-import ru.ifmo.rain.balahin.imageviewer.viewModel.DownloadInformation
-import ru.ifmo.rain.balahin.imageviewer.viewModel.ImageModel
+import ru.ifmo.rain.balahin.imageviewer.dto.DownloadInformation
+import ru.ifmo.rain.balahin.imageviewer.dto.ImageModel
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -44,19 +44,27 @@ class ImageLoaderService : IntentService("Loader thread") {
                     } else {
                         ""
                     }
-                    val downloadInformation = DownloadInformation(
-                        it.urls["full"] ?: "",
-                        it.width,
-                        it.height
+                    val downloadInformation =
+                        DownloadInformation(
+                            it.urls["full"] ?: "",
+                            it.width,
+                            it.height
+                        )
+                    ImageModel(
+                        bitmap,
+                        description,
+                        author,
+                        downloadInformation
                     )
-                    ImageModel(bitmap, description, author, downloadInformation)
                 } catch (exception: Exception) {
                     //todo default image
-                    ImageModel(null, "ds", "asa", DownloadInformation(
-                        it.urls["full"] ?: "",
-                        it.width,
-                        it.height
-                    ))
+                    ImageModel(
+                        null, "ds", "asa", DownloadInformation(
+                            it.urls["full"] ?: "",
+                            it.width,
+                            it.height
+                        )
+                    )
                 }
             }.toMutableList()
         } catch (e: Exception) {
@@ -75,6 +83,7 @@ class ImageLoaderService : IntentService("Loader thread") {
     @UiThread
     fun downloaded() {
         MainActivity.imageAdapter.images.addAll(images)
+        ImageScrollListener.viewedCountImages += images.size
         MainActivity.imageAdapter.notifyDataSetChanged()
     }
 
