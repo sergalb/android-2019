@@ -30,7 +30,7 @@ class MainActivityTest {
         lateinit var activity: Activity
         lateinit var activityController: ActivityController<MainActivity>
 
-        val contactsRoboCursor: RoboCursor = RoboCursor()
+        lateinit var contactsRoboCursor: RoboCursor
         private lateinit var contentResolver: ContentResolver
 
         private val CONTACTS_COLUMNS = listOf(
@@ -49,29 +49,6 @@ class MainActivityTest {
         @BeforeClass
         @JvmStatic
         fun setUpTestData() {
-            contactsRoboCursor.setColumnNames(CONTACTS_COLUMNS)
-            contactsRoboCursor.setResults(
-                arrayOf(
-                    CONTACT_SERG,
-                    CONTACT_SERGALB,
-                    CONTACT_NOT_USED,
-                    CONTACT_PIKACHU,
-                    CONTACT_88005553535
-                )
-            )
-
-            contentResolver = mock {
-                on {
-                    query(
-                        anyOrNull(),
-                        anyOrNull(),
-                        anyOrNull(),
-                        anyOrNull(),
-                        anyOrNull()
-                    )
-                } doReturn contactsRoboCursor
-            }
-
             contacts = listOf(
                 Contact("serg", "+7999888545"),
                 Contact("sergalb", "+79991234551"),
@@ -80,14 +57,44 @@ class MainActivityTest {
                 Contact("88005553535", "88005553535")
             ).sortedWith(compareBy({ it.name }, { it.phoneNumber }))
         }
+
     }
 
     @Before
     fun setupActivity() {
+        contactsRoboCursor = RoboCursor()
+        contactsRoboCursor.setColumnNames(CONTACTS_COLUMNS)
+        contactsRoboCursor.setResults(
+            arrayOf(
+                CONTACT_SERG,
+                CONTACT_SERGALB,
+                CONTACT_NOT_USED,
+                CONTACT_PIKACHU,
+                CONTACT_88005553535
+            )
+        )
+        contentResolver = mock {
+            on {
+                query(
+                    anyOrNull(),
+                    anyOrNull(),
+                    anyOrNull(),
+                    anyOrNull(),
+                    anyOrNull()
+                )
+            } doReturn contactsRoboCursor
+        }
+
+
+
         activityController = Robolectric.buildActivity(MainActivity::class.java)
         activity = activityController.get()
         val shadowContentResolver = shadowOf(activity.contentResolver)
         shadowContentResolver.setCursor(contactsRoboCursor)
+    }
+    @After
+    fun killActivity(){
+        activityController.stop()
     }
 
     @Test
@@ -102,6 +109,8 @@ class MainActivityTest {
 
     @Test
     fun contactsSetedOnQuery() {
+        //given
+
         //when
         provideSearchQuery("sergalb")
 
@@ -145,7 +154,7 @@ class MainActivityTest {
 
         recyclerView.measure(0, 0)
         recyclerView.layout(0, 0, 100, 10000)
-        assertEquals("unexpected contacts counts", recyclerView.adapter!!.itemCount, expected.size)
+        assertEquals("unexpected contacts counts", expected.size, recyclerView.adapter!!.itemCount)
         for (i in expected.indices) {
             val holder = recyclerView.findViewHolderForAdapterPosition(i) as ContactViewHolder
             assertEquals(expected[i].name, holder.name.text)

@@ -21,7 +21,6 @@ class SearchTest {
         contactSearchUtility.addContactsForSearch(contacts)
     }
 
-
     @Test
     fun successSearchByPartName() {
         //given: contacts
