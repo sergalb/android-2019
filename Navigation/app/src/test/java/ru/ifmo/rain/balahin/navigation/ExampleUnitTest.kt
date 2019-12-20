@@ -1,4 +1,4 @@
-package ru.ifmo.rain.navigation
+package ru.ifmo.rain.balahin.navigation
 
 import org.junit.Test
 
