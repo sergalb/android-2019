@@ -32,7 +32,6 @@ class WeekToListDayModels {
         val responseDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val viewDateFormat = SimpleDateFormat("dd MMM")
         val res: MutableList<DayModel> = ArrayList()
-//        val existingDays: MutableSet<Int> = HashSet()
         for (dayDTO in weekFromJson.list) {
             val date = responseDateFormat.parse(dayDTO.date)
             if (date.hours != 15) continue

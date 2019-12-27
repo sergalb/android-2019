@@ -38,7 +38,6 @@ fun createWeatherApi(): WeatherApi {
     val retrofit = Retrofit.Builder()
         .client(client)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
-
         .baseUrl("http://api.openweathermap.org/")
         .build()
     val api: WeatherApi = retrofit.create(WeatherApi::class.java)

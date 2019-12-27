@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory
 import android.util.Log
 import android.widget.ImageView
 import androidx.annotation.UiThread
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import ru.ifmo.rain.balahin.imageviewer.MainActivity
 import java.lang.ref.WeakReference
 import java.net.HttpURLConnection
@@ -39,16 +41,19 @@ class FullImageLoaderService : IntentService("Loader thread") {
             url += "${querySymbol}h=${maxHeight}"
         }
 
-
-        try {
-            val connection = URL(url)
-                .openConnection() as HttpURLConnection
-            connection.requestMethod = "GET"
-
-            bitmap = BitmapFactory.decodeStream(connection.inputStream)
-        } catch (exception: RuntimeException) {
-            Log.d("tag", exception.message ?: "error while download full image")
-            //todo default image
+        runBlocking {
+            val loadImage = async {
+                try {
+                    val connection = URL(url)
+                        .openConnection() as HttpURLConnection
+                    connection.requestMethod = "GET"
+                    bitmap = BitmapFactory.decodeStream(connection.inputStream)
+                } catch (exception: RuntimeException) {
+                    Log.d("tag", exception.message ?: "error while download full image")
+                    //todo default image
+                }
+            }
+            loadImage.await()
         }
         stopSelf()
     }
